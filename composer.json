@@ -1,0 +1,32 @@
+{
+    "name": "netinteractive/seed",
+    "version": "0.0.1",
+    "description": "Seeder",
+    "authors": [
+        {
+            "name": "Piotr Pryga",
+            "email": "halfik@gmail.com",
+            "role": "Owner"
+        },
+        {
+            "name": "Kamil Pietrzak",
+            "email": "kamil.pietrzak@netinteractive.pl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*",
+        "illuminate/database": "*"
+    },
+    "autoload": {
+		"classmap": [
+            "src/config",
+            "src/seed"
+		],
+        "psr-0": {
+            "Netinteractive\\Seed": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
