@@ -33,5 +33,8 @@ Netinteractive\Seed\SeedServiceProvider
 
 ## Changelog
 
+### 0.0.2
+    - paczka wydaje sie stabilna
+
 ### 0.0.1
  -  dodanie Commands\TestDataSeedCommand
