@@ -4,7 +4,7 @@ namespace Netinteractive\Seed;
 
 /**
  *
- * @package    Seeder
+ * @package    Netinteractive\Seed
  * @version    1.0.0
  * @author     Kamil Pietrzak
  */

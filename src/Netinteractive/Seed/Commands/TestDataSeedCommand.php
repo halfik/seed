@@ -5,6 +5,13 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ *
+ * @package   Netinteractive\Seed
+ * @subpackage Netinteractive\Seed\Commands
+ * @version    0.0.1
+ * @author     Piotr Pryga
+ */
 class TestDataSeedCommand extends Command {
 
     /**

@@ -4,6 +4,10 @@ use Illuminate\Support\ServiceProvider;
 use Netinteractive\Seed\Commands\TestDataSeedCommand;
 use Netinteractive\Testbench\Commands\DataSeedCommand;
 
+/**
+ * Class SeedServiceProvider
+ * @package Netinteractive\Seed
+ */
 class SeedServiceProvider extends ServiceProvider {
 
     /**
