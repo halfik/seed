@@ -21,8 +21,7 @@
     },
     "autoload": {
 		"classmap": [
-            "src/config",
-            "src/seed"
+            "src/config"
 		],
         "psr-0": {
             "Netinteractive\\Seed": "src/"

@@ -29,7 +29,7 @@ w respositories:
 
 w app/config/app.php dodajemy provider:
 
-Netinteractive\Seeder\SeedServiceProvider
+Netinteractive\Seed\SeedServiceProvider
 
 ## Changelog
 

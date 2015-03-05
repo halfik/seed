@@ -19,7 +19,7 @@ class TestDataSeedCommand extends Command {
      *
      * @var string
      */
-    protected $name = 'seeder:ni-test-data';
+    protected $name = 'seed:ni-test-data';
 
 
     /**
@@ -59,7 +59,7 @@ class TestDataSeedCommand extends Command {
             throw new \Exception(_('Komenda działa jedynie dla środowiska testing. Odpal z parameterm --env=testing'));
         }
 
-        $config = \Config::get('ni-seeder::test');
+        $config = \Config::get('ni-seed::test');
 
 
         \DB::connection()->disableQueryLog();

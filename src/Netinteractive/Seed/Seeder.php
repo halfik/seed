@@ -8,7 +8,6 @@ namespace Netinteractive\Seed;
  * @version    1.0.0
  * @author     Kamil Pietrzak
  */
- 
 class Seeder extends \Seeder
 {
     /**

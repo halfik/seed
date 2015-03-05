@@ -35,7 +35,7 @@ class SeedServiceProvider extends ServiceProvider {
     public function register()
     {
 
-        $this->package('netinteractive/seeder', 'ni-seeder');
+        $this->package('netinteractive/seed', 'ni-seed');
 
         $this->registerTestDataCmd();
 
@@ -43,11 +43,11 @@ class SeedServiceProvider extends ServiceProvider {
 
     protected function registerTestDataCmd()
     {
-        $this->app->bind('seeder:ni-test-data', function($app)
+        $this->app->bind('seed:ni-test-data', function($app)
         {
             return new TestDataSeedCommand();
         });
-        $this->commands('seeder:ni-test-data');
+        $this->commands('seed:ni-test-data');
     }
 
     /**
