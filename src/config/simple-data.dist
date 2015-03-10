@@ -1,8 +1,99 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+$faker = \Faker\Factory::create(\Config::get('app.locale'));
 
+return array(
+    'Order' => array(
+        array(
+            'data' => array(
+                'date_from' => function() use($faker){
+                    $date = $faker->dateTimeBetween('-200 days', 'now');
+                    return $date->format('Y-m-d');
+                },
+                'date_to' => function() use($faker){
+                    $date = $faker->dateTimeBetween('now', '+200 days');
+                    return $date->format('Y-m-d');
+                },
+                'with_weekends' => function(){ return rand()%2; },
+                'weeks' => function() use($faker){ return $faker->randomNumber(1); },
+                'price' => function() use($faker){ return $faker->randomNumber(4); },
+                'user__id' => function(){ 
+                    return App('User')->orderByRaw("RAND()")->limit(1)->get()->first()->id; 
+                },
+                'city' => 'faker:city',
+                'street' => 'faker:streetAddress',
+                'street_number' => 'faker:randomNumber',
+                'post_code' => 'faker:postcode',
+                'local_number' => function() use($faker){ return $faker->randomNumber(3); },
+                'floor_number' => function() use($faker){ return $faker->randomNumber(2); },
+                'notes' => 'faker:text',
+            ),
+            'repetitions' => \DatabaseSeeder::DENSITY * 10
+        ),
+    ),
+    'Category' => array(
+        array(
+            'data' => array(
+                'name' => 'faker:word',
+                'template' => function(){
+                    $arr = array('normalny','bez wartości odżywczych');
+                    return $arr[array_rand($arr)];
+                },
+            ),
+            'repetitions' => \DatabaseSeeder::DENSITY * 8
+        ),
+    ),
+    'Street' => array(
+        array(
+            'data' => array(
+                'city' => function() use($faker){ 
+                    return $faker->randomNumber(5);
+                },
+                'street' => 'faker:streetAddress',
+            ),
+            'repetitions' => \DatabaseSeeder::DENSITY * 10
+        ),
+    ),
+    'LocationDelivery' => array(
+        array(
+            'data'=> array(
+                'city' => 'faker:city',
+                'district' => 'faker:word',
+                'post_code' => 'faker:postcode',
+                'street' => 'faker:streetAddress',
+                'street_number' => function() use($faker){
+                    return $faker->randomNumber(2);
+                },
+                'access_code' => function(){
+                    if(rand()%2) {
+                        return strtoupper(uniqid('ACCESS'));
+                    }
+                    else {
+                        return '';
+                    }
+                },
+                'service_access_code' => function(){
+                    if(rand()%2) {
+                        return strtoupper(uniqid('ACCESS'));
+                    }
+                    else {
+                        return '';
+                    }
+                }
+            ),
+            'repetitions' => \DatabaseSeeder::DENSITY * 10
+        ),
+    ),
+    'LocationReport' => array(
+        array(
+            'data' => array(
+                'city' => 'faker:city',
+                'street' => 'faker:streetAddress',
+                'street_number' => function() use($faker){
+                    return $faker->randomNumber(2);
+                },
+            ),
+            'repetitions' => \DatabaseSeeder::DENSITY * 10
+        ),
+    ),
+);
