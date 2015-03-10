@@ -61,7 +61,6 @@ class TestDataSeedCommand extends Command {
 
         $config = \Config::get('ni-seed::test');
 
-
         \DB::connection()->disableQueryLog();
 
         foreach ($config AS $modelName=>$dataList){

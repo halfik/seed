@@ -6,8 +6,6 @@ $position1 =  App::make('MedPosition')->orderBy(DB::raw('random()'))->take(1)->f
 $scienceDegreeList  =  App::make('MedScienceDegree')->all();
 $doctorSpecList = App::make('MedSpecialization')->all();
 
-
-
 return array(
     'Med' => array(
         array(

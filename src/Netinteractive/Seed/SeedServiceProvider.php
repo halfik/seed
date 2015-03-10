@@ -2,6 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Netinteractive\Seed\Commands\TestDataSeedCommand;
+use Netinteractive\Seed\Commands\SimpleDataSeedCommand;
 use Netinteractive\Testbench\Commands\DataSeedCommand;
 
 /**
@@ -34,11 +35,9 @@ class SeedServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-
         $this->package('netinteractive/seed', 'ni-seed');
 
         $this->registerTestDataCmd();
-
     }
 
     protected function registerTestDataCmd()
@@ -47,6 +46,12 @@ class SeedServiceProvider extends ServiceProvider {
         {
             return new TestDataSeedCommand();
         });
+        $this->app->bind('seed:ni-data', function($app)
+        {
+            return new SimpleDataSeedCommand();
+        });
+
+        $this->commands('seed:ni-data');
         $this->commands('seed:ni-test-data');
     }
 
