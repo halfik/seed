@@ -126,17 +126,17 @@ class SimpleDataSeedCommand extends Command {
                                     $elToCreateList = $elToCreateList->toArray();
                                 }
 
+                                if($elToCreateList) {
+                                    foreach ($elToCreateList AS $elToCreateData){
+                                        $relModel = \App::make($relModelClass);
 
-                                foreach ($elToCreateList AS $elToCreateData){
-                                    $relModel = \App::make($relModelClass);
+                                        $modelForeign = $model->getTable().'__id';
+                                        $elToCreateData[$modelForeign] = $model->id;
 
-                                    $modelForeign = $model->getTable().'__id';
-                                    $elToCreateData[$modelForeign] = $model->id;
-
-                                    $relModel->fill($elToCreateData);
-                                    $relModel->save();
+                                        $relModel->fill( $this->prepareData($elToCreateData) );
+                                        $relModel->save();
+                                    }
                                 }
-
                             }
                         }
                     }
@@ -146,7 +146,7 @@ class SimpleDataSeedCommand extends Command {
                         exit;
                     }
                     
-                    $seeder->progressBar($rep, $repetitions, $modelName);
+                    $seeder->progressBar($rep+1, $repetitions+1, $modelName);
                 }                
             }
         }
