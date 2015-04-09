@@ -10,7 +10,8 @@ Netinteractive\Seed
 - seed:ni-data - uruchamia komende seedująca dane na podstawie configu simple-data-seeder.php
 
 ## Przykłady
-Przykładowy plik konfiguracyjny seedera znajduje się w simple-data-seeder.php
+- seed:ni-test-data - przykładowy plik konfiguracyjny seedera znajduje się w config/test.dist.php
+- seed:ni-data - przykładowy plik konfiguracyjny seedera znajduje się w config/simple-data-seeder.dist.php
 
 ## Installation
 
@@ -35,8 +36,11 @@ Netinteractive\Seed\SeedServiceProvider
 
 ## Changelog
 
+### 0.0.3-0.0.4
+ - uzupelnienie dokumentacji
+
 ### 0.0.2
-    - paczka wydaje sie stabilna
+ - paczka wydaje sie stabilna
 
 ### 0.0.1
  -  dodanie Commands\TestDataSeedCommand
