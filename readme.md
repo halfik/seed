@@ -9,7 +9,8 @@ Netinteractive\Seed
 - seed:ni-test-data - na podstawie config/test.php seeduje testowa baze danych. trzeba odpalac z parameterm --env=testing
 - seed:ni-data - uruchamia komende seedująca dane na podstawie configu simple-data-seeder.php
 
-
+## Przykłady
+Przykładowy plik konfiguracyjny seedera znajduje się w simple-data-seeder.php
 
 ## Installation
 
