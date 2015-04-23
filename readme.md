@@ -36,6 +36,9 @@ Netinteractive\Seed\SeedServiceProvider
 
 ## Changelog
 
+### 0.0.4-0.0.5 
+ - dodanie opcji keep_last i zmiana pobierania pliku nie z app/config tylku z configu pakietu
+
 ### 0.0.3-0.0.4
  - uzupelnienie dokumentacji
 

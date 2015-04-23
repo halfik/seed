@@ -86,7 +86,7 @@ class SimpleDataSeedCommand extends Command {
                 
                 $model = \App::make($modelName);
 
-                if(!$data['keep_last'] || !isset($data['keep_last'])) {
+                if(isset($data['keep_last']) && !$data['keep_last']) {
                     \DB::table($model->getTable())->delete();
                 }
 
