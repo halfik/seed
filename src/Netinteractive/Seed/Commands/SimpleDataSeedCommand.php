@@ -71,11 +71,11 @@ class SimpleDataSeedCommand extends Command {
         $args = $this->argument();
         
         $configFile = isset($args['config-file']) ? $args['config-file'] : $this->config ;
-        
-        $config = \Config::get($configFile);
+
+
+        $config = \Config::get("ni-seed::".$configFile);
         
         \DB::connection()->disableQueryLog();
-
 
         foreach ($config AS $modelName=>$dataList){
 
@@ -85,8 +85,11 @@ class SimpleDataSeedCommand extends Command {
                 $seeder = new \Netinteractive\Seed\Seeder();
                 
                 $model = \App::make($modelName);
-                \DB::table($model->getTable())->delete();
-                
+
+                if(!$data['keep_last'] || !isset($data['keep_last'])) {
+                    \DB::table($model->getTable())->delete();
+                }
+
                 if(!$data['repetitions']){
                     throw new \Exception(_('Nie podałeś ilości powtórzeń dla tabeli: '. $model->getTableName()));
                 }
