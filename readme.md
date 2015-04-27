@@ -36,6 +36,9 @@ Netinteractive\Seed\SeedServiceProvider
 
 ## Changelog
 
+### 0.0.6
+ - sprawdzanie w attachu czy przekazywana wartosc jest (callable) i tym przypadku wywolywanie jej
+
 ### 0.0.4-0.0.5 
  - dodanie opcji keep_last i zmiana pobierania pliku nie z app/config tylku z configu pakietu
 

@@ -108,6 +108,11 @@ class SimpleDataSeedCommand extends Command {
                         // sprawdzamy czy sa jakies rekordy powiazane, ktore laczymy przez attach
                         if (isSet($data['attach'])){
                             foreach ($data['attach'] AS $rel=>$elToAttachList){
+
+                                if(is_callable($elToAttachList)){
+                                    $elToAttachList = call_user_func($elToAttachList);
+                                }
+
                                 if ($elToAttachList instanceof \Netinteractive\Elegant\Collection){
                                     $elToAttachList = $elToAttachList->toArray();
                                 }
