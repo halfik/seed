@@ -1,6 +1,4 @@
-<?php
-
-namespace Netinteractive\Seed;
+<?php namespace Netinteractive\Seed;
 
 /**
  *
@@ -11,12 +9,12 @@ namespace Netinteractive\Seed;
 class Seeder extends \Seeder
 {
     /**
-     * Metoda pokazuje progressbar na ekranie
-     * Aby funkcja działała prawidłowo musi przyjąć na poczatku $current = 1
+     * Metoda adds progress bar to seeders
+     * To function to work properly set $current = 1 at the begining
      * 
-     * @param $currenct akualny index
-     * @param $max najwyzszy index
-     * #param $title tytuł akcji
+     * @param $currenct current index
+     * @param $max max index
+     * #param $title text do display
      */
     public function progressBar($current, $max, $title = null)
     {
@@ -25,38 +23,37 @@ class Seeder extends \Seeder
         if(isset($out[0]) && $out[0] > 0){
             $progressWidth = $out[0];
         }
-        else
-        {
+        else {
             $progressWidth=80-23-10;
         }
-        
-        //var_dump($out,$ret);
+
         $bar = '';
 
-        if ($current == 1 && $title)
-        {
+        if ($current == 1 && $title) {
             echo " --- $title($max):\n";
         }
+
         $percent = $current / $max * 100;
 
-        if ($percent < 10)
+        if ($percent < 10){
             $bar .= ' ';
+        }
 
-        if ($percent < 100)
+
+        if ($percent < 100){
             $bar .= ' ';
+        }
+
 
         $bar .= number_format($percent, 2) . '% - ';
         $bar .= '|';
         $checkedSymbols = $progressWidth * $current / $max;
 
-        for ($x = 0; $x < $progressWidth; $x++)
-        {
-            if ($x < $checkedSymbols)
-            {
+        for ($x = 0; $x < $progressWidth; $x++) {
+            if ($x < $checkedSymbols) {
                 $bar .= "\033[0;32m-\033[0m";
             }
-            else
-            {
+            else {
                 $bar .= ".";
             }
         }
@@ -64,8 +61,7 @@ class Seeder extends \Seeder
 
         echo "\r\r $bar";
 
-        if ($current == $max)
-        {
+        if ($current == $max) {
             echo "\n";
         }
     }

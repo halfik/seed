@@ -1,5 +1,4 @@
-<?php
-namespace Netinteractive\Seed\Commands;
+<?php namespace Netinteractive\Seed\Commands;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -9,7 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
  *
  * @package   Netinteractive\Seed
  * @subpackage Netinteractive\Seed\Commands
- * @version    0.0.1
+ * @version    1.0.0
  * @author     Piotr Pryga
  */
 class TestDataSeedCommand extends Command {
@@ -56,7 +55,7 @@ class TestDataSeedCommand extends Command {
     public function fire()
     {
         if (!\App::environment('testing')){
-            throw new \Exception(_('Komenda działa jedynie dla środowiska testing. Odpal z parameterm --env=testing'));
+            throw new \Exception(_('Command is avaible only for testing environment. Use it with --env=testing parameter.'));
         }
 
         $config = \Config::get('ni-seed::test');
@@ -68,14 +67,14 @@ class TestDataSeedCommand extends Command {
             foreach ($dataList AS $data){
 
                 $model = \App::make($modelName);
-                 \DB::table($model->getTable())->delete();
+                \DB::table($model->getTable())->delete();
 
-                #zapisujemy rekord
+                #record save
                 try{
                     $model->fill($data['data']);
                     $model->save();
 
-                    #sprawdzamy czy sa jakies rekordy powiazane, ktore laczymy przez attach
+                    #here we check if there are any related data we should attach to record
                     if (isSet($data['attach'])){
                         foreach ($data['attach'] AS $rel=>$elToAttachList){
                             if ($elToAttachList instanceof \Netinteractive\Elegant\Collection){
@@ -88,7 +87,7 @@ class TestDataSeedCommand extends Command {
                         }
                     }
 
-                    #sprawdzamy czy sa jakies rekordy powiazane, ktore trzeba utworzyc
+                    #here we check if there are any related data we have to create
                     if (isSet($data['create'])){
                         foreach ($data['create'] AS $relModelClass=>$elToCreateList){
                             if ( is_callable($elToCreateList) ){

@@ -2,23 +2,21 @@ Netinteractive\Seed
 =====================
 
 
-#Usługi
-- SeedServiceProvider - usługa rejestruje komendy seedujace
+## Service Providers
+- SeedServiceProvider - provider register all commands
 
-##Komendy
-- seed:ni-test-data - na podstawie config/test.php seeduje testowa baze danych. trzeba odpalac z parameterm --env=testing
-- seed:ni-data - uruchamia komende seedująca dane na podstawie configu simple-data-seeder.php
+## Commands
+- seed:ni-test-data - command that based on config/test.php seeds data base. run it with --env=testing parameter
 
-## Przykłady
-- seed:ni-test-data - przykładowy plik konfiguracyjny seedera znajduje się w config/test.dist.php
-- seed:ni-data - przykładowy plik konfiguracyjny seedera znajduje się w config/simple-data-seeder.dist.php
+## Examples
+- seed:ni-test-data - example seeder config file can be cound in w config/test.dist.php
 
 ## Installation
 
-Dodajemy w composer.json w sekcji required
+Add to composer.json to required section
 ```
 #!php
-"netinteractive/seed": "0.0.*,
+"netinteractive/seed": "1.0.*,
 ```
 
 w respositories:
@@ -30,23 +28,11 @@ w respositories:
 },
 ```
 
-w app/config/app.php dodajemy provider:
+Add provider to app/config/app.php:
 
 Netinteractive\Seed\SeedServiceProvider
 
 ## Changelog
 
-### 0.0.6
- - sprawdzanie w attachu czy przekazywana wartosc jest (callable) i tym przypadku wywolywanie jej
-
-### 0.0.4-0.0.5 
- - dodanie opcji keep_last i zmiana pobierania pliku nie z app/config tylku z configu pakietu
-
-### 0.0.3-0.0.4
- - uzupelnienie dokumentacji
-
-### 0.0.2
- - paczka wydaje sie stabilna
-
-### 0.0.1
- -  dodanie Commands\TestDataSeedCommand
+### 1.0.0
+    init
