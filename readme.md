@@ -19,7 +19,7 @@ Add to composer.json to required section
 "netinteractive/seed": "1.0.*,
 ```
 
-w respositories:
+in repositories:
 ```
 #!php
 {
@@ -29,10 +29,11 @@ w respositories:
 ```
 
 Add provider to app/config/app.php:
-
+```
 Netinteractive\Seed\SeedServiceProvider
+```
 
 ## Changelog
 
-### 1.0.0
+### 1.0.0 - 0.1
     init
