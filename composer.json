@@ -1,6 +1,6 @@
 {
     "name": "netinteractive/seed",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Seed",
     "authors": [
         {
@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "4.2.*",
+        "illuminate/support": "5.1.*",
         "illuminate/database": "*"
     },
     "autoload": {
