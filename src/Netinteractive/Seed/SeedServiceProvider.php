@@ -18,12 +18,15 @@ class SeedServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
-     * Bootstrap the application events.
-     *
-     * @return void
-     */
+    * Bootstrap the application events.
+    *
+    * @return void
+    */
     public function boot()
     {
+        $this->publishes(array(
+            __DIR__.'/../../config/test.php' => config_path('/packages/netinteractive/seed/test.php'),
+        ), 'config');
 
     }
 
