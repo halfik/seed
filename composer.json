@@ -1,6 +1,6 @@
 {
     "name": "netinteractive/seed",
-    "version": "1.0.2",
+    "version": "1.0.0",
     "description": "Seed",
     "authors": [
         {
@@ -16,6 +16,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
+        "jeremeamia/superclosure": "~2.0",
         "illuminate/support": "5.1.*",
         "illuminate/database": "*"
     },

@@ -11,14 +11,15 @@ use Symfony\Component\Console\Input\InputArgument;
  * @version    1.0.0
  * @author     Piotr Pryga
  */
-class TestDataSeedCommand extends Command {
+class TestDataSeedCommand extends Command
+{
 
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'seed:ni-test-data';
+    protected $name = 'db:ni-seed:test-data';
 
 
     /**
@@ -36,7 +37,6 @@ class TestDataSeedCommand extends Command {
     public function __construct()
     {
         parent::__construct();
-
     }
 
     /**
@@ -58,12 +58,48 @@ class TestDataSeedCommand extends Command {
             throw new \Exception(_('Command is avaible only for testing environment. Use it with --env=testing parameter.'));
         }
 
-        $config = \Config::get('ni-seed::test');
+
+        $configName = $this->option('config');
+        if(!$configName){
+            $configName = 'packages.netinteractive.seed.test';
+        }
+
+        $config = \Config::get($configName);
 
         \DB::connection()->disableQueryLog();
+        if (!isSet($config['data']) || !is_array($config) || count($config['data'])==0){
+            throw new \Exception(_('Config file errror: no data found.'));
+        }
 
-        foreach ($config AS $modelName=>$dataList){
+        if (isSet($config['tables'] )){
+            $this->createTables($config['tables']);
+        }
 
+        $this->seedData($config['data']);
+
+    }
+
+    /**
+     * Creates tables
+     * @param $list
+     */
+    protected function createTables($list)
+    {
+        $serializer = new \SuperClosure\Serializer(null, 'ni-seed-test');
+
+        foreach ($list AS $name=>$func){
+            $funcToCall = $serializer->unserialize($func);
+            $funcToCall();
+        }
+    }
+
+    /**
+     * Seeds data
+     * @param array $data
+     */
+    protected function seedData(array $seedData)
+    {
+        foreach ($seedData AS $modelName=>$dataList){
             foreach ($dataList AS $data){
 
                 $model = \App::make($modelName);
@@ -77,7 +113,7 @@ class TestDataSeedCommand extends Command {
                     #here we check if there are any related data we should attach to record
                     if (isSet($data['attach'])){
                         foreach ($data['attach'] AS $rel=>$elToAttachList){
-                            if ($elToAttachList instanceof \Netinteractive\Elegant\Collection){
+                            if ($elToAttachList instanceof \Illuminate\Support\Collection){
                                 $elToAttachList = $elToAttachList->toArray();
                             }
 
@@ -94,10 +130,9 @@ class TestDataSeedCommand extends Command {
                                 $elToCreateList = $elToCreateList();
                             }
 
-                            if ($elToCreateList instanceof \Netinteractive\Elegant\Collection){
+                            if ($elToCreateList instanceof \Illuminate\Support\Collection){
                                 $elToCreateList = $elToCreateList->toArray();
                             }
-
 
                             foreach ($elToCreateList AS $elToCreateData){
                                 $relModel = \App::make($relModelClass);
@@ -112,13 +147,12 @@ class TestDataSeedCommand extends Command {
                         }
                     }
                 }
-                catch (Netinteractive\Elegant\Exception\ValidationException $exception){
+                catch (\Netinteractive\Elegant\Exception\ValidationException $exception){
                     print_R($data);
                     print_R($exception->getMessageBag());
                     exit;
                 }
             }
-
         }
     }
 
@@ -141,7 +175,7 @@ class TestDataSeedCommand extends Command {
     protected function getOptions()
     {
         return array(
-
+            array('config', null, InputOption::VALUE_OPTIONAL, 'config.', null),
         );
     }
 
