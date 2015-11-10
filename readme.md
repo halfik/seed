@@ -35,5 +35,5 @@ Netinteractive\Seed\SeedServiceProvider
 
 ## Changelog
 
-### 1.0.0 - .5
+### 1.0.0
     init

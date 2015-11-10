@@ -27,7 +27,6 @@ class SeedServiceProvider extends ServiceProvider
         $this->publishes(array(
             __DIR__.'/../../config/test.php' => config_path('/packages/netinteractive/seed/test.php'),
         ), 'config');
-
     }
 
     /**
