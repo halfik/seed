@@ -85,11 +85,14 @@ class TestDataSeedCommand extends Command
      */
     protected function createTables($list)
     {
-        $serializer = new \SuperClosure\Serializer(null, 'ni-seed-test');
+        $serializer = new \SuperClosure\Serializer(null, null);
 
         foreach ($list AS $name=>$func){
             $funcToCall = $serializer->unserialize($func);
-            $funcToCall();
+
+            if (is_callable($funcToCall)){
+                $funcToCall();
+            }
         }
     }
 
@@ -99,19 +102,23 @@ class TestDataSeedCommand extends Command
      */
     protected function seedData(array $seedData)
     {
-        foreach ($seedData AS $modelName=>$dataList){
-            foreach ($dataList AS $data){
 
-                $model = \App::make($modelName);
-                \DB::table($model->getTable())->delete();
+        foreach ($seedData AS $recordClass=>$dataList){
+            $dbMapper = new \Netinteractive\Elegant\Mapper\DbMapper($recordClass);
+
+            $dbMapper->getQuery()->delete();
+
+            foreach ($dataList AS $data){
 
                 #record save
                 try{
-                    $model->fill($data['data']);
-                    $model->save();
+                    $record = $dbMapper->getRecord();
+                    $record->fill($data['data']);
+
+                    $dbMapper->save($record);
 
                     #here we check if there are any related data we should attach to record
-                    if (isSet($data['attach'])){
+                   /* if (isSet($data['attach'])){
                         foreach ($data['attach'] AS $rel=>$elToAttachList){
                             if ($elToAttachList instanceof \Illuminate\Support\Collection){
                                 $elToAttachList = $elToAttachList->toArray();
@@ -146,6 +153,7 @@ class TestDataSeedCommand extends Command
 
                         }
                     }
+                   */
                 }
                 catch (\Netinteractive\Elegant\Exception\ValidationException $exception){
                     print_R($data);

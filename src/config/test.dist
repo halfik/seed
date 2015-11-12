@@ -1,6 +1,8 @@
 <?php
-
-$serializer = new SuperClosure\Serializer(null, 'ni-seed-test');
+/**
+* @deprecated
+**/
+$serializer = new SuperClosure\Serializer(null, null);
 
 /**
 * example config
