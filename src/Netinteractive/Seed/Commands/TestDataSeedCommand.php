@@ -112,8 +112,7 @@ class TestDataSeedCommand extends Command
 
                 #record save
                 try{
-                    $record = $dbMapper->getRecord();
-                    $record->fill($data['data']);
+                    $record = $dbMapper->createRecord($data['data']);
 
                     $dbMapper->save($record);
 
