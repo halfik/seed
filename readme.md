@@ -35,5 +35,9 @@ Netinteractive\Seed\SeedServiceProvider
 
 ## Changelog
 
+
+### 1.0.2
+    fixed elegant requirement bug
+
 ### 1.0.0
     init
