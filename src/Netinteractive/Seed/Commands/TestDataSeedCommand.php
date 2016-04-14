@@ -85,10 +85,8 @@ class TestDataSeedCommand extends Command
      */
     protected function createTables($list)
     {
-        $serializer = new \SuperClosure\Serializer(null, null);
-
         foreach ($list AS $name=>$func){
-            $funcToCall = $serializer->unserialize($func);
+            $funcToCall = unserialize($func);
 
             if (is_callable($funcToCall)){
                 $funcToCall();

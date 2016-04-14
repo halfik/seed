@@ -35,9 +35,11 @@ Netinteractive\Seed\SeedServiceProvider
 
 ## Changelog
 
-
+### 1.0.3
+    * change: we haved changed jeremeamia/superclosure package to opis/closure. It gave us 4x performance boost when cache:config is not used.
+    
 ### 1.0.2
-    fixed elegant requirement bug
+    * fixed: elegant requirement bug
 
 ### 1.0.0
-    init
+    * init
